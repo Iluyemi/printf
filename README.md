@@ -1,3 +1,3 @@
 > # printf
-Prototype function for printf 
+Prototype function for printf
 - Collaborative project on C
