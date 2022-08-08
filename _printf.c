@@ -4,7 +4,7 @@
 /**
  * _printf - printf prototype
  * format: input char
- * Return: calculated printed character 
+ * Return: calculated printed character
  */
 int _printf(const char *format, ...)
 {
