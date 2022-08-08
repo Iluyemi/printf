@@ -1,31 +1,17 @@
 #include "main.h"
 /**
- * print_num - stdout
- * @a: input char
- * Return: 1 if successful
- */
-int print_num(int a)
-{
-	while (a > 0)
-	{
-		_putchar((a % 10) + '0');
-		a /= 10;
-	}
-	_putchar('\n');
-	return (1);
-}
-
-/**
  * _printf - printf prototype
- * @format: input char
- * Return: calculated printed character
+ * format: input char
+ * Return: calculated printed character 
  */
 int _printf(const char *format, ...)
 {
 va_list ap;
 va_start(ap, format);
-int counter = 0, string = 0, a = 0;
+int counter = 0, string = 0, Decimal;
 char *string_output;
+char *pointer_output;
+int a = 0;
 	while (format[counter] != '\0')
 	{
 		if (format[counter] != '%')
@@ -54,12 +40,20 @@ char *string_output;
 			string++;
 		}
 		break;
+		case 'd': decimal = va_arg(ap, int);
+			  while (num > 0)
+			  {
+				  _putchar((decimal % 10) + '0');
+				  decimal /= 10;
+				  a++;
+			  }
+			  break;
 	}
 	counter++;
 	}
 	counter++;
 	}
-print_num(a);
 va_end(ap);
+
 return (a);
 }
