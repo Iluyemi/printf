@@ -11,7 +11,7 @@ int function_pointer(char q, va_list arg);
 
 /**
  * struct array - array for format specifier
- * @array: type name
+ * @specifier: type name
  * @function: function pointer
  */
 
