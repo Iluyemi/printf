@@ -18,7 +18,6 @@ int print_char(va_list arg)
  */
 
 int print_string(va_list arg)
->>>>>>> refs/remotes/origin/main
 {
 	char *s = va_arg(arg, char *);
 	int length = 0;
