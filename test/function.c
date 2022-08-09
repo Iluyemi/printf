@@ -3,13 +3,13 @@
 int (*function(char c))(va_list)
 {
 	if( c = 'c')
-		return();
+	  return(print_char(va_arg(ap, int)));
 	if (c = 's')
-		return ();
+	  return (print_string(va_arg(ap, char *)));
 	if (c = 'd')
-		return ();
+	  return (print_double(va_arg(ap, double)));
 	if (c = 'i')
-		return ();
+	  return (print_int(va_arg(ap, int)));
 
 	return(NULL);
 }
