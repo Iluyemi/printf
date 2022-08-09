@@ -2,6 +2,7 @@
 #define _MAIN_H_
 #include <stdlib.h>
 #include <stdarg.h>
+
 int _putchar(char c);
 int _printf(const char *format, ...);
 int print_char(va_list arg);
@@ -19,4 +20,5 @@ typedef struct array
   char *specifier;
   int (*function)(va_list);
 } array;
+
 #endif /* _MAIN_H_ */
