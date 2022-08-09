@@ -5,6 +5,7 @@
  * @int: variable data type
  * Return:  _putchar
  */
+
 int print_char(va_list arg)
 {
 	return (_putchar(va_arg(arg, int)));
@@ -15,7 +16,6 @@ int print_char(va_list arg)
  * @args: va_list
  * Return: int
  */
-
 
 int pr_str(va_list arg)
 {

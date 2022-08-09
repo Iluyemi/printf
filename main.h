@@ -11,14 +11,14 @@ int function_pointer(char q, va_list arg);
 
 /**
  * struct array - array for format specifier
- * @array: type name 
+ * @array: type name
  * @function: function pointer
  */
-  
+
 typedef struct array
 {
-  char *specifier;
-  int (*function)(va_list);
-} array;
+	char *specifier;
+	int (*function)(va_list);
+}	array;
 
 #endif /* _MAIN_H_ */
