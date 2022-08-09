@@ -27,7 +27,7 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			get = function_pointer(format[++i], arg);
+			get = function_pointer(format[i + 1], arg);
 			if (get == -1 || get != 0)
 			i++;
 			if  (get > 0)
