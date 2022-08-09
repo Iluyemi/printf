@@ -8,7 +8,9 @@ int _printf(const char *format, ...);
 int print_char(va_list arg);
 int print_string(va_list arg);
 int function_pointer(char q, va_list arg);
-
+int print_int(va_list arg);
+int print_unsigned(va_list arg);
+void print_binary(unsigned int n, unsigned int* printed);
 /**
  * struct array - array for format specifier
  * @specifier: type name
