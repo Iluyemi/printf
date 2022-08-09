@@ -11,7 +11,7 @@
 int _printf(const char *format, ...)
 {
 	va_list arg;
-	int (*get)(va_list);
+	int get;
 	int i = 0;
 	int n_displayed = 0;
 
@@ -29,19 +29,12 @@ int _printf(const char *format, ...)
 		else
 		{
 			get = function_pointer(format[++i], arg);
-			if (get != NULL)
-			{
-				n_displayed += get(arg);
-			}
-			else
-			{
-				if (format[i + 1] == '\0')
-					return (-1);
-				n_displayed += _putchar(format[i - 1]);
-				n_displayed += _putchar(format[i]);
-			}
+			if (get == -1 || get != 0)
 			i++;
+			if  (get > 0)
+			n_displayed += get;
 		}
+		i++;
 	}
 
 

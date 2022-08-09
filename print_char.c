@@ -5,9 +5,9 @@
  * @int: variable data type
  * Return:  _putchar
  */
-int print_char(va_arg(ap, int))
+int print_char(va_list arg)
 {
-	return (_putchar(va_arg(ap, int)));
+	return (_putchar(va_arg(arg, int)));
 }
 
 /**
