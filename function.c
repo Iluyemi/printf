@@ -4,7 +4,6 @@
  * function_pointer - prints special characters
  * @q: character after the %
  * @arg: argument for the indentifier
- * @struct array: created data type
  * Return: the number of characters printed
  * (excluding the null byte used to end output to strings)
  */
@@ -13,7 +12,7 @@ int function_pointer(char q, va_list arg)
 {
 	int Index;
 
-	struct array function[] = {
+	array function[] = {
 		{"c", print_char},
 		{"s", print_string},
 		{"d", print_int},

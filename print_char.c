@@ -2,7 +2,7 @@
 
 /**
  * print_char - fucntion that handles character
- * @int: variable data type
+ * @arg: variable data type
  * Return:  _putchar
  */
 int print_char(va_list arg)
@@ -11,13 +11,13 @@ int print_char(va_list arg)
 }
 
 /**
- * pr_str - prints a string
- * @args: va_list
+ * print_string - prints a string
+ * @arg: va_list
  * Return: int
  */
 
 
-int pr_str(va_list arg)
+int print_string(va_list arg)
 {
 	char *s = va_arg(arg, char *);
 	int length = 0;
