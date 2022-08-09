@@ -1,49 +1,52 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stddef.h>
+
+/**
+ *_printf - produces output according to a format
+ *
+ *@format : Formatted string output
+ *@ ... : Unknown number of arguments
+ *
+ *Return : Return arguments
+ */
 
 int _printf(const char *format, ...)
 {
-	va_list args;
-	int i = 0, k = 0;
-	int n_displayed = 0;
-	char *str = NULL;
+        int i = 0, num = 0;
+        int (*get)(va_list);
+        va_list args;
 
-	va_start(args, format);
+        va_start(args, format);
 
-	while (format[i] != '\0')
-	{
-		if (format[i] != '%')
-		_putchar(format[i]);
+	if (format == NULL)
+		return (-1);
+        while (*(format + i))
+        {
+                if (*(format + i) != '%')
+                {
+                        num += _putchar(*(format + i));
+			i++;
+			continue;
+		}
+		if (format[i + 1] == '%')
+		{
+			num += _putchar(*(format + i));
+			i++;
+			continue;
+		}
+		get = get_function(format[++i]);
+		if ((get) != NULL)
+		{
+			num += get(args);
+		}
 		else
 		{
-			if (format[i + 1] == 'c')
-			{
-				_putchar(va_arg(args, int));
-				i++;
-			}
-			else if (format[i + 1] == 's')
-			{
-				i++;
-				str = va_arg(args, char *);
-				k = 0;
-				while (str[k] != '\0')
-				{
-					_putchar(str[k]);
-					k++;
-				}
-			}
-			else if (format[i + 1] == '%')
-			{
-				i++;
-				_putchar('%');
-				n_displayed++;
-			}
+			if (*(format + i) == '\0')
+				return (-1);
+			num += _putchar(format[i - 1]);
+			num += _putchar(format[i]);
 		}
-			i++;
+		i++;
 	}
-
 	va_end(args);
-
-	return (n_displayed);
+	return (num);
 }
