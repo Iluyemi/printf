@@ -1,52 +1,50 @@
 #include "main.h"
-
+	
 /**
- *_printf - produces output according to a format
- *
- *@format : Formatted string output
- *@ ... : Unknown number of arguments
- *
- *Return : Return arguments
+ * _printf - prints output to standard output
+ * @format: Formatted string output
+ * @...: Unknown varable argument
+ * Return: Return 1 if successful
  */
+
 
 int _printf(const char *format, ...)
 {
-        int i = 0, num = 0;
-        int (*get)(va_list);
-        va_list args;
+	va_list arg;
+	int (*get)(va_list);
+	int i = 0;
+	int n_displayed = 0;
 
-        va_start(args, format);
-
+	va_start(arg, format);
 	if (format == NULL)
 		return (-1);
-        while (*(format + i))
-        {
-                if (*(format + i) != '%')
-                {
-                        num += _putchar(*(format + i));
-			i++;
-			continue;
-		}
-		if (format[i + 1] == '%')
+	while (format[i])
+	{
+		if (format[i] != '%' || (format[i] == '%' && format[i + 1] == '%'))
 		{
-			num += _putchar(*(format + i));
-			i++;
-			continue;
-		}
-		get = get_function(format[++i]);
-		if ((get) != NULL)
-		{
-			num += get(args);
+		n_displayed += _putchar(format[i]);
+		i++;
+		continue;
 		}
 		else
 		{
-			if (*(format + i) == '\0')
-				return (-1);
-			num += _putchar(format[i - 1]);
-			num += _putchar(format[i]);
+			get = function_pointer(format[++i], arg);
+			if (get != NULL)
+			{
+				n_displayed += get(arg);
+			}
+			else
+			{
+				if (format[i + 1] == '\0')
+					return (-1);
+				n_displayed += _putchar(format[i - 1]);
+				n_displayed += _putchar(format[i]);
+			}
+			i++;
 		}
-		i++;
 	}
-	va_end(args);
-	return (num);
+
+
+	va_end(arg);
+	return (n_displayed);
 }
