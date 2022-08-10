@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * printIdentifiers - prints special characters
+ * function_pointer - prints special characters
  * struct array - array
  * @q: character after the %
  * @arg: argument for the indentifier
