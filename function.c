@@ -46,7 +46,7 @@ return (n_displayed);
 
 
 /**
- * print_STR - prints a string with a `S` (upper case) specificer
+ * print_String - prints a string with a `S` (upper case) specificer
  * @arg: argument
  * Return: number of character printed
  */

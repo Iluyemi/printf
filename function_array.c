@@ -1,16 +1,17 @@
 #include "main.h"
 /**
  * printIdentifiers - prints special characters
+ * struct array - array
  * @q: character after the %
  * @arg: argument for the indentifier
  * Return: the number of characters printed
  * (excluding the null byte used to end output to strings)
  */
 
-int printIdentifiers(char q, va_list arg)
+int function_pointer(char q, va_list arg)
 {
 int Index;
-struct array function[] = {
+array function[] = {
 {"c", print_char},
 {"s", print_string},
 {"d", print_int},

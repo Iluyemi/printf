@@ -10,17 +10,17 @@ int _printf(const char *format, ...);
 int print_char(va_list arg);
 int print_String(va_list arg);
 int print_percent(void);
-void print_binary(unsigned int n, unsigned int* printed);
+void print_binary(unsigned int n, unsigned int *printed);
 int print_unsignedToBinary(va_list arg);
 int print_oct(va_list arg);
 int print_unsignedIntToHex(unsigned int num, char _case);
 int print_hex_base(va_list arg, char _case);
 int print_hex(va_list arg);
 int print_HEX(va_list arg);
-int print_string (va_list arg);
-
+int print_string(va_list arg);
+int function_pointer(char q, va_list arg);
 /**
- * struct identifierStruct - structure definition of a printTypeStruct
+ * struct array - structure definition of a printTypeStruct
  * @indentifier: type
  * @printer: function to print
  */

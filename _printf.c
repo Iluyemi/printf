@@ -36,7 +36,7 @@ int _printf(const char *format, ...)
 		if (format[i + 1] == '\0')
 			return (-1);
 
-		get = printIdentifiers(format[i + 1], arg);
+		get = function_pointer(format[i + 1], arg);
 		if (get == -1 || get != 0)
 			i++;
 		if (get > 0)
