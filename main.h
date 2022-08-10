@@ -27,6 +27,6 @@ int function_pointer(char q, va_list arg);
 typedef struct array
 {
 char *indentifier;
-int (*printer)(va_list);
+int (*printer)(va_list arg);
 } array;
 #endif /* _MAIN_H_ */
