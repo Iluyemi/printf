@@ -13,9 +13,8 @@ int _printf(const char *format, ...)
 	va_list arg;
 
 	va_start(arg, format);
-	if (format == NULL)
-		return (-1);
-
+	if (format != NULL)
+	{
 	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] != '%')
@@ -33,7 +32,7 @@ int _printf(const char *format, ...)
 		}
 		if (format[i + 1] == '\0')
 			return (-1);
-
+		if (function_pointer != NULL)
 		get = function_pointer(format[i + 1], arg);
 		if (get == -1 || get != 0)
 			i++;
@@ -46,6 +45,9 @@ int _printf(const char *format, ...)
 			n_displayed++;
 		}
 	}
+	}
+	else
+		return(-1);
 	va_end(arg);
 	return (n_displayed);
 }
