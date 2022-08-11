@@ -1,7 +1,6 @@
 #include "main.h"
 
-/* PRINT UNSIGNED NUMBER */
-/**
+/* PRINT UNSIGNED NUMBER
  * print_unsigned - Prints an unsigned number
  * @types: List a of arguments
  * @buffer: Buffer array to handle print
@@ -35,8 +34,7 @@ int print_unsigned(va_list types, char buffer[],
 	return (write_unsgnd(0, i, buffer, flags, width, precision, size));
 }
 
-/************* PRINT UNSIGNED NUMBER IN OCTAL  ****************/
-/**
+/* PRINT UNSIGNED NUMBER IN OCTAL
  * print_octal - Prints an unsigned number in octal notation
  * @types: Lista of arguments
  * @buffer: Buffer array to handle print
