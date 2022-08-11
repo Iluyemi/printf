@@ -3,7 +3,6 @@
  * function_pointer - prints special characters
  * struct array - array
  * @q: character after the %
- * @arg: argument for the indentifier
  * Return: the number of characters printed
  * (excluding the null byte used to end output to strings)
  */
