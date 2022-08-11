@@ -1,34 +1,37 @@
+
+
 #include "main.h"
 /**
- * function_pointer - prints special characters
- * struct array - array
- * @q: character after the %
- * Return: the number of characters printed
- * (excluding the null byte used to end output to strings)
+ * get_print_func - selects the correct function to perform the operation.
+ * @s: argument indentifier
+ * @index: index for argument indentifier
+ * Return: pointer to a function.
  */
-
-int (*function_pointer(const char q))(va_list arg)
+int (*get_print_func(const char *s, int index))(va_list, char *, unsigned int)
 {
-int Index = 0;
-const int i = 10;
-array function[] = {
-{"c", print_char},
-{"s", print_string},
-{"d", print_int},
-{"i", print_int},
-{"u", print_unsigned},
-{"b", print_unsignedToBinary},
-{"o", print_oct},
-{"x", print_hex},
-{"X", print_HEX},
-{"S", print_String}
-};
-for (Index = 0;	Index < i; Index++)
-{
-if (function[Index].indentifier[0] == q)
-return (function[Index].printer);
-}
-return (NULL);
-}
+	print_t pr[] = {
+		{"c", print_chr}, {"s", print_str},
+		{"i", print_int}, {"d", print_int},
+		{"p", print_add}, {" %", print_prg}, {NULL, NULL},
+	};
+	int i = 0, j = 0, first_index;
 
-
+	first_index = index;
+	while (pr[i].type_arg)
+	{
+		if (s[index] == pr[i].type_arg[j])
+		{
+			if (pr[i].type_arg[j + 1] != '\0')
+				index++, j++;
+			else
+				break;
+		}
+		else
+		{
+			j = 0;
+			i++;
+			index = first_index;
+		}
+	}
+	return (pr[i].f);
+}

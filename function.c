@@ -1,122 +1,127 @@
 #include "main.h"
+#include <stdio.h>
 /**
- * print_char - writes the character c to stdout
- * @arg: argument
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * print_int - prints an integer
+ * @arguments: input string
+ * @buf: buffer pointer
+ * @ibuf: index for buffer pointer
+ * Return: number of chars printed.
  */
-int print_char(va_list arg)
+int print_int(va_list arguments, char *buf, unsigned int ibuf)
 {
-	return (_putchar(va_arg(arg, int)));
-}
+	int int_input;
+	unsigned int int_in, int_temp, i, div, isneg;
 
-/**
- * print_int - prints an integer.
- * @arg: argument
- * Return: 0
- */
-
-int print_int(va_list arg)
-{
-
-unsigned int divisor = 1, i, resp, n_displayed = 0;
-int n = va_arg(arg, int);
-
-if (n < 0)
-{
-	_putchar('-');
-	n_displayed++;
-	n *= -1;
-}
-
-for (i = 0; n / divisor > 9; i++, divisor *= 10)
-;
-
-for (; divisor >= 1; n %= divisor, divisor /= 10, n_displayed++)
-{
-	resp = n / divisor;
-	_putchar('0' + resp);
-}
-return (n_displayed);
-}
-
-
-
-/**
- * print_String - prints a string with a `S` (upper case) specificer
- * @arg: argument
- * Return: number of character printed
- */
-
-int print_String(va_list arg)
-{
-int i;
-char *str = va_arg(arg, char*);
-
-if (str == NULL)
-	str = "(null)";
-else if (*str == '\0')
-	return (-1);
-
-for (i = 0; str[i]; i++)
-{
-	if ((str[i] < 32 && str[i] > 0) || str[i] >= 127)
+	int_input = va_arg(arguments, int);
+	isneg = 0;
+	if (int_input < 0)
 	{
-		_putchar('\\');
-		_putchar('x');
-		if (i < 16)
-			_putchar('0');
-
-		print_unsignedIntToHex(str[i], 'A');
+		int_in = int_input * -1;
+		ibuf = handl_buf(buf, '-', ibuf);
+		isneg = 1;
 	}
 	else
-		_putchar(str[i]);
-}
+	{
+		int_in = int_input;
+	}
 
-return (i);
+	int_temp = int_in;
+	div = 1;
+
+	while (int_temp > 9)
+	{
+		div *= 10;
+		int_temp /= 10;
+	}
+
+	for (i = 0; div > 0; div /= 10, i++)
+	{
+		ibuf = handl_buf(buf, ((int_in / div) % 10) + '0', ibuf);
+	}
+	return (i + isneg);
+}
+/**
+ * print_chr - writes the character c to stdout
+ * @arguments: input char
+ * @buf: buffer pointer
+ * @ibuf: index for buffer pointer
+ * Return: On success 1.
+ */
+int print_chr(va_list arguments, char *buf, unsigned int ibuf)
+{
+	char c;
+
+	c = va_arg(arguments, int);
+	handl_buf(buf, c, ibuf);
+
+	return (1);
 }
 
 /**
- * print_string - prints a string with a `s` (lower case) specifier
- * @arg: argument
- * Return: number of character printed
+ * print_prg - writes the character c to stdout
+ * @a: input char
+ * @buf: buffer pointer
+ * @i: index for buffer pointer
+ * Return: On success 1.
  */
-
-int print_string(va_list arg)
+int print_prg(va_list a __attribute__((unused)), char *buf, unsigned int i)
 {
-int i;
-char *str = va_arg(arg, char*);
+	handl_buf(buf, '%', i);
 
-if (str == NULL)
-	str = "(null)";
-else if (*str == '\0')
-	return (-1);
-
-for (i = 0; str[i]; i++)
-	_putchar(str[i]);
-
-return (i);
+	return (1);
 }
-
 /**
- * print_unsigned - prints an unsigned int.
- * @arg: argument
- * Return: 0
+ * fill_hex_array - writes the character c to stdout
+ *
+ * @bnr: array where is stored the binary.
+ * @hex: array where is stored the hexadecimal.
+ * @isupp: integer that determines if the hexadecimal array is
+ * in uppercase or lowercase letter.
+ * @limit: size of hex
+ * Return: binary array.
  */
-
-int print_unsigned(va_list arg)
+char *fill_hex_array(char *bnr, char *hex, int isupp, int limit)
 {
-int divisor = 1, i, resp;
-unsigned int n = va_arg(arg, unsigned int);
+	int op, i, j, toletter;
 
-for (i = 0; n / divisor > 9; i++, divisor *= 10)
-;
-
-for (; divisor >= 1; n %= divisor, divisor /= 10)
-{
-	resp = n / divisor;
-	_putchar('0' + resp);
+	hex[limit] = '\0';
+	if (isupp)
+		toletter = 55;
+	else
+		toletter = 87;
+	for (i = (limit * 4) - 1; i >= 0; i--)
+	{
+		for (op = 0, j = 1; j <= 8; j *= 2, i--)
+			op = ((bnr[i] - '0') * j) + op;
+		i++;
+		if (op < 10)
+			hex[i / 4] = op + 48;
+		else
+			hex[i / 4] = op + toletter;
+	}
+	return (hex);
 }
-return (i + 1);
+/**
+ * print_str - writes the string to stdout
+ * @arguments: input string
+ * @buf: buffer pointer
+ * @ibuf: index for buffer pointer
+ * Return: On success 1.
+ */
+int print_str(va_list arguments, char *buf, unsigned int ibuf)
+{
+	char *str;
+	unsigned int i;
+	char nill[] = "(null)";
+
+	str = va_arg(arguments, char *);
+	if (str == NULL)
+	{
+		for (i = 0; nill[i]; i++)
+			ibuf = handl_buf(buf, nill[i], ibuf);
+		return (6);
+	}
+	for (i = 0; str[i]; i++)
+		ibuf = handl_buf(buf, str[i], ibuf);
+	return (i);
 }

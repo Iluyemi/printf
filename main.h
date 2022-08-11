@@ -1,32 +1,29 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
-#include <stdlib.h>
-#include <stdarg.h>
 
-int _putchar(char c);
-int print_int(va_list arg);
-int print_unsigned(va_list arg);
-int _printf(const char *format, ...);
-int print_char(va_list arg);
-int print_String(va_list arg);
-int print_percent(void);
-void print_binary(unsigned int n, unsigned int *printed);
-int print_unsignedToBinary(va_list arg);
-int print_oct(va_list arg);
-int print_unsignedIntToHex(unsigned int num, char _case);
-int print_hex_base(va_list arg, char _case);
-int print_hex(va_list arg);
-int print_HEX(va_list arg);
-int print_string(va_list arg);
-int (*function_pointer(const char q))(va_list arg);
+#include <stdarg.h>
+#include <unistd.h>
+#include <stdlib.h>
+
 /**
- * struct array - structure definition of a printTypeStruct
- * @indentifier: type
- * @printer: function to print
- */
-typedef struct array
+ *  * struct print - struct for printer functions
+ *   * @type_arg: identifier
+ *    * @f: pointer to a printer functions
+ *     *
+ *      * Description: struct that stores pointers to a
+ *       * printer functions.
+ *        */
+typedef struct print
 {
-char *indentifier;
-int (*printer)(va_list arg);
-} array;
-#endif /* _MAIN_H_ */
+		char *type_arg;
+			int (*f)(va_list, char *, unsigned int);
+} print_t;
+
+int _printf(const char *format, ...);
+int print_prg(va_list __attribute__((unused)), char *, unsigned int);
+int print_chr(va_list arguments, char *buf, unsigned int ibuf);
+int print_str(va_list arguments, char *buf, unsigned int ibuf);
+int print_int(va_list arguments, char *buf, unsigned int ibuf);
+int (*get_print_func(const char *s, int index))(va_list, char *, unsigned int);
+char *fill_hex_array(char *bnr, char *hex, int isupp, int limit);
+#endif
