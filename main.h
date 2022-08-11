@@ -18,7 +18,7 @@ int print_hex_base(va_list arg, char _case);
 int print_hex(va_list arg);
 int print_HEX(va_list arg);
 int print_string(va_list arg);
-int function_pointer(char q, va_list arg);
+int (*function_pointer(const char q))(va_list arg);
 /**
  * struct array - structure definition of a printTypeStruct
  * @indentifier: type

@@ -8,9 +8,10 @@
  * (excluding the null byte used to end output to strings)
  */
 
-int function_pointer(char q, va_list arg)
+int (*function_pointer(const char q))(va_list arg)
 {
-int Index;
+int Index = 0;
+const int i = 10;
 array function[] = {
 {"c", print_char},
 {"s", print_string},
@@ -21,15 +22,14 @@ array function[] = {
 {"o", print_oct},
 {"x", print_hex},
 {"X", print_HEX},
-{"S", print_String},
-{NULL, NULL}
+{"S", print_String}
 };
-for (Index = 0; function[Index].indentifier != NULL; Index++)
+for (Index = 0;	Index < i; Index++)
 {
 if (function[Index].indentifier[0] == q)
-return (function[Index].printer(arg));
+return (function[Index].printer);
 }
-return (0);
+return (NULL);
 }
 
 

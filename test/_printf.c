@@ -1,31 +1,53 @@
 #include "main.h"
 /**
- * _printf - printf prototype
- * format: input char
- * Return: calculated printed character 
+ * _printf - prints output to standard output
+ * @format: Formatted string output
+ * @...: Unknown varable argument
+ * Return: Return 1 if successful
  */
+
 int _printf(const char *format, ...)
 {
-va_list ap;
-va_start(ap, format);
-int counter = 0, string = 0, Decimal;
-int a = 0;
-	while (format[counter] != '\0')
+	unsigned int i;
+	int get = 0, n_displayed = 0;
+	va_list arg;
+
+	va_start(arg, format);
+	if (format != NULL)
 	{
-		if (format[counter] != '%')
+	for (i = 0; format[i] != '\0'; i++)
+	{
+		if (format[i] != '%')
 		{
-			_putchar(format[counter]);
-			a++;
+			_putchar(format[i]);
+			n_displayed++;
+			continue;
 		}
+		if (format[i + 1] == '%')
+		{
+			_putchar('%');
+			n_displayed++;
+			i++;
+			continue;
+		}
+		if (format[i + 1] == '\0')
+			return (-1);
+		if (function_pointer != NULL)
+		get = function_pointer(format[i + 1], arg);
+		if (get == -1 || get != 0)
+			i++;
+		if (get > 0)
+			n_displayed += get;
+
+		if (get == 0)
+		{
+			_putchar('%');
+			n_displayed++;
+		}
+	}
+	}
 	else
-	{
-
-	}
-	counter++;
-	}
-	counter++;
-}
-va_end(ap);
-
-return (a);
+		return(-1);
+	va_end(arg);
+	return (n_displayed);
 }
